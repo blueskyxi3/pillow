@@ -1,4 +1,13 @@
 github.com/enenumxela/to v0.0.0-20210514034403-664fcedaca6d h1:IM38Awk++fCFShLO7I7iCtuUfVZdTBQRUn3KcZUcFpo=
 github.com/enenumxela/to v0.0.0-20210514034403-664fcedaca6d/go.mod h1:DdbxivXrYQjBBIdgsoIRmGxFbJOrX2FnpH+xcqKPLP0=
+github.com/enenumxela/urlx v0.0.0-20210513065732-e6ca46195405 h1:GTaOhTHjej+e0fqH3l5JVrkAD4MRqdpiRYwI7ALO9yw=
+github.com/enenumxela/urlx v0.0.0-20210513065732-e6ca46195405/go.mod h1:be/5CuPqttAAj7oUUgi+ybAwEGv9x3Qj/SkFR1HY8xU=
+golang.org/x/net v0.0.0-20210510120150-4163338589ed h1:p9UgmWI9wKpfYmgaV/IZKGdXc5qEK45tDwwwDyjS26I=
+golang.org/x/net v0.0.0-20210510120150-4163338589ed/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
+golang.org/x/sys v0.0.0-20201119102817-f84b799fce68/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/sys v0.0.0-20210423082822-04245dca01da/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1/go.mod h1:bj7SfCRtBDWHUb9snDiAeCFNEtKQo2Wmx5Cou7ajbmo=
+golang.org/x/text v0.3.6/go.mod h1:5Zoc/QRtKVWzQhOtBMvqHzDpF6irO9z98xDceosuGiQ=
+golang.org/x/tools v0.0.0-20180917221912-90fa682c2a6e/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=
 golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 h1:go1bK/D/BFZV2I8cIQd1NKEZ+0owSTG1fDTci4IqFcE=
 golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=

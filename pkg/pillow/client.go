@@ -6,13 +6,15 @@ import (
 	"encoding/json"
 	"net"
 	"net/http"
-	"net/url"
 	"time"
+
+	"github.com/enenumxela/pillow/pkg/ub"
+	"github.com/enenumxela/urlx/pkg/urlx"
 )
 
 // New
 func New(dsn string) (client *Client, err error) {
-	parsedDSN, err := url.Parse(dsn)
+	parsedDSN, err := urlx.Parse(dsn)
 	if err != nil {
 		return
 	}
@@ -65,7 +67,7 @@ func (client *Client) Ping(ctx context.Context) (pong bool, err error) {
 
 // ListDatabases
 func (client *Client) ListDatabases(ctx context.Context, options ...Options) (databases []string, err error) {
-	path := NewPathBuilder(client.DSN()).AddPath("_all_dbs").String()
+	path := ub.NewURLBuilder(client.DSN()).AddPath("_all_dbs").String()
 
 	res, err := client.request(http.MethodGet, path, nil, nil)
 	if err != nil {

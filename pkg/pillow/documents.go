@@ -6,12 +6,13 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/enenumxela/pillow/pkg/ub"
 	"github.com/enenumxela/to/pkg/to"
 )
 
 // CheckDocument
 func (db *DB) CheckDocument(ctx context.Context, id string, options ...Options) (exists bool, err error) {
-	path := NewPathBuilder(db.client.DSN()).AddPath(db.Name(), id).AddQuery(mergeOptions(options...)).String()
+	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name(), id).AddQuery(mergeOptions(options...)).String()
 
 	res, err := db.client.request(http.MethodHead, path, nil, nil)
 	if err != nil {
@@ -33,7 +34,7 @@ func (db *DB) CheckDocument(ctx context.Context, id string, options ...Options) 
 
 // CreateDocument
 func (db *DB) CreateDocument(ctx context.Context, document interface{}, options ...Options) (output map[string]interface{}, err error) {
-	path := NewPathBuilder(db.client.DSN()).AddPath(db.Name()).AddQuery(mergeOptions(options...)).String()
+	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name()).AddQuery(mergeOptions(options...)).String()
 
 	headers := map[string]string{
 		"Accept":       "application/json",
@@ -64,7 +65,7 @@ func (db *DB) CreateDocument(ctx context.Context, document interface{}, options 
 }
 
 func (db *DB) CreateDesignDocument(ctx context.Context, document map[string]interface{}, options ...Options) (output map[string]interface{}, err error) {
-	path := NewPathBuilder(db.client.DSN()).AddPath(db.Name(), "_design", db.Name()).AddQuery(mergeOptions(options...)).String()
+	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name(), "_design", db.Name()).AddQuery(mergeOptions(options...)).String()
 
 	headers := map[string]string{
 		"Accept":       "application/json",
@@ -96,7 +97,7 @@ func (db *DB) CreateDesignDocument(ctx context.Context, document map[string]inte
 
 // RetrieveDocument
 func (db *DB) RetrieveDocument(ctx context.Context, id string, options ...Options) (output map[string]interface{}, err error) {
-	path := NewPathBuilder(db.client.DSN()).AddPath(db.Name(), id).AddQuery(mergeOptions(options...)).String()
+	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name(), id).AddQuery(mergeOptions(options...)).String()
 
 	res, err := db.client.request(http.MethodGet, path, nil, nil)
 	if err != nil {
@@ -114,7 +115,7 @@ func (db *DB) RetrieveDocument(ctx context.Context, id string, options ...Option
 
 // UpdateDocument
 func (db *DB) UpdateDocument(ctx context.Context, id string, document interface{}, options ...Options) (output map[string]interface{}, err error) {
-	path := NewPathBuilder(db.client.DSN()).AddPath(db.Name(), id).AddQuery(mergeOptions(options...)).String()
+	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name(), id).AddQuery(mergeOptions(options...)).String()
 
 	headers := map[string]string{
 		"Accept":       "application/json",
@@ -146,7 +147,7 @@ func (db *DB) UpdateDocument(ctx context.Context, id string, document interface{
 
 // DeleteDocument
 func (db *DB) DeleteDocument(ctx context.Context, id string, options ...Options) (output map[string]interface{}, err error) {
-	path := NewPathBuilder(db.client.DSN()).AddPath(db.Name(), id).AddQuery(mergeOptions(options...)).String()
+	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name(), id).AddQuery(mergeOptions(options...)).String()
 
 	res, err := db.client.request(http.MethodDelete, path, nil, nil)
 	if err != nil {
@@ -164,7 +165,7 @@ func (db *DB) DeleteDocument(ctx context.Context, id string, options ...Options)
 
 // ListDocuments
 func (db *DB) ListDocuments(ctx context.Context, options ...Options) (output map[string]interface{}, err error) {
-	path := NewPathBuilder(db.client.DSN()).AddPath(db.Name(), "_all_docs").AddQuery(mergeOptions(options...)).String()
+	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name(), "_all_docs").AddQuery(mergeOptions(options...)).String()
 
 	headers := map[string]string{
 		"Accept": "application/json",
