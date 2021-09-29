@@ -1,20 +1,20 @@
 package ub
 
 import (
+	"net/url"
 	"path/filepath"
 
 	"github.com/enenumxela/to/pkg/to"
-	"github.com/enenumxela/urlx/pkg/urlx"
 )
 
 // URLBuilder
 type URLBuilder struct {
-	URL *urlx.URL
+	URL *url.URL
 }
 
 // NewURLBuilder
 func NewURLBuilder(URL string) (ub *URLBuilder) {
-	parsedURL, _ := urlx.Parse(URL)
+	parsedURL, _ := url.Parse(URL)
 
 	ub = &URLBuilder{
 		URL: parsedURL,

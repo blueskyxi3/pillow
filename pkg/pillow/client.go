@@ -6,15 +6,15 @@ import (
 	"encoding/json"
 	"net"
 	"net/http"
+	"net/url"
 	"time"
 
 	"github.com/enenumxela/pillow/pkg/ub"
-	"github.com/enenumxela/urlx/pkg/urlx"
 )
 
 // New
 func New(dsn string) (client *Client, err error) {
-	parsedDSN, err := urlx.Parse(dsn)
+	parsedDSN, err := url.Parse(dsn)
 	if err != nil {
 		return
 	}
