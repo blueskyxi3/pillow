@@ -10,7 +10,7 @@ pillow is a CouchDB client in [Go(Golang)](https://golang.org/).
 ## Installation
 
 ```bash
-go get -u github.com/enenumxela/pkg/pillow
+go get -u github.com/enenumxela/pillow/pkg/pillow
 ```
 
 ## Usage

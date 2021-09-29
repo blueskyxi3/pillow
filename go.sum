@@ -1,0 +1,4 @@
+github.com/enenumxela/to v0.0.0-20210514034403-664fcedaca6d h1:IM38Awk++fCFShLO7I7iCtuUfVZdTBQRUn3KcZUcFpo=
+github.com/enenumxela/to v0.0.0-20210514034403-664fcedaca6d/go.mod h1:DdbxivXrYQjBBIdgsoIRmGxFbJOrX2FnpH+xcqKPLP0=
+golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 h1:go1bK/D/BFZV2I8cIQd1NKEZ+0owSTG1fDTci4IqFcE=
+golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
