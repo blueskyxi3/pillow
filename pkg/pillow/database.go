@@ -9,6 +9,11 @@ import (
 	"github.com/enenumxela/pillow/pkg/ub"
 )
 
+type DB struct {
+	name   string
+	client *Client
+}
+
 // Name
 func (db *DB) Name() string {
 	return db.name
@@ -20,7 +25,7 @@ func (db *DB) Client() *Client {
 }
 
 // Exists
-func (db *DB) Exists(ctx context.Context, options ...Options) (exists bool, err error) {
+func (db *DB) Exists(ctx context.Context, options ...map[string]interface{}) (exists bool, err error) {
 	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name()).AddQuery(mergeOptions(options...)).String()
 
 	res, err := db.client.request(http.MethodHead, path, nil, nil)
@@ -40,7 +45,7 @@ func (db *DB) Exists(ctx context.Context, options ...Options) (exists bool, err 
 // Create
 // {"ok":true}
 // {"error":"file_exists","reason":"The database could not be created, the file already exists."}
-func (db *DB) Create(ctx context.Context, options ...Options) (output *CreateDatabaseResponse, err error) {
+func (db *DB) Create(ctx context.Context, options ...map[string]interface{}) (output *CreateDatabaseResponse, err error) {
 	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name()).AddQuery(mergeOptions(options...)).String()
 
 	res, err := db.client.request(http.MethodPut, path, nil, nil)
@@ -63,7 +68,7 @@ func (db *DB) Create(ctx context.Context, options ...Options) (output *CreateDat
 }
 
 // Query
-func (db *DB) Query(ctx context.Context, ddcoc, view string, options ...Options) (output map[string]interface{}, err error) {
+func (db *DB) Query(ctx context.Context, ddcoc, view string, options ...map[string]interface{}) (output map[string]interface{}, err error) {
 	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.name, "_design", ddcoc, "_view", view).AddQuery(mergeOptions(options...)).String()
 
 	headers := map[string]string{
@@ -86,7 +91,7 @@ func (db *DB) Query(ctx context.Context, ddcoc, view string, options ...Options)
 
 // Delete
 // {"ok":true}
-func (db *DB) Delete(ctx context.Context, options ...Options) (output *DeleteDatabaseResponse, err error) {
+func (db *DB) Delete(ctx context.Context, options ...map[string]interface{}) (output *DeleteDatabaseResponse, err error) {
 	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name()).AddQuery(mergeOptions(options...)).String()
 
 	res, err := db.client.request(http.MethodDelete, path, nil, nil)

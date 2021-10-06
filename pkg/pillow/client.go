@@ -12,6 +12,11 @@ import (
 	"github.com/enenumxela/pillow/pkg/ub"
 )
 
+type Client struct {
+	dsn  string
+	http *http.Client
+}
+
 // New
 func New(dsn string) (client *Client, err error) {
 	parsedDSN, err := url.Parse(dsn)
@@ -66,7 +71,7 @@ func (client *Client) Ping(ctx context.Context) (pong bool, err error) {
 }
 
 // ListDatabases
-func (client *Client) ListDatabases(ctx context.Context, options ...Options) (databases []string, err error) {
+func (client *Client) ListDatabases(ctx context.Context, options ...map[string]interface{}) (databases []string, err error) {
 	path := ub.NewURLBuilder(client.DSN()).AddPath("_all_dbs").String()
 
 	res, err := client.request(http.MethodGet, path, nil, nil)
