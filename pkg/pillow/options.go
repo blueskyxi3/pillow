@@ -1,11 +1,11 @@
 package pillow
 
-func mergeOptions(options ...Options) (merged Options) {
+func mergeOptions(options ...map[string]interface{}) (merged map[string]interface{}) {
 	if len(options) == 0 {
 		return
 	}
 
-	merged = make(Options)
+	merged = make(map[string]interface{})
 
 	for _, options := range options {
 		for k, v := range options {

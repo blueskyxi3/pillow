@@ -11,7 +11,7 @@ import (
 )
 
 // CheckDocument
-func (db *DB) CheckDocument(ctx context.Context, id string, options ...Options) (exists bool, err error) {
+func (db *DB) CheckDocument(ctx context.Context, id string, options ...map[string]interface{}) (exists bool, err error) {
 	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name(), id).AddQuery(mergeOptions(options...)).String()
 
 	res, err := db.client.request(http.MethodHead, path, nil, nil)
@@ -33,7 +33,7 @@ func (db *DB) CheckDocument(ctx context.Context, id string, options ...Options) 
 }
 
 // CreateDocument
-func (db *DB) CreateDocument(ctx context.Context, document interface{}, options ...Options) (output map[string]interface{}, err error) {
+func (db *DB) CreateDocument(ctx context.Context, document interface{}, options ...map[string]interface{}) (output map[string]interface{}, err error) {
 	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name()).AddQuery(mergeOptions(options...)).String()
 
 	headers := map[string]string{
@@ -64,7 +64,7 @@ func (db *DB) CreateDocument(ctx context.Context, document interface{}, options 
 	return
 }
 
-func (db *DB) CreateDesignDocument(ctx context.Context, document map[string]interface{}, options ...Options) (output map[string]interface{}, err error) {
+func (db *DB) CreateDesignDocument(ctx context.Context, document map[string]interface{}, options ...map[string]interface{}) (output map[string]interface{}, err error) {
 	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name(), "_design", db.Name()).AddQuery(mergeOptions(options...)).String()
 
 	headers := map[string]string{
@@ -96,7 +96,7 @@ func (db *DB) CreateDesignDocument(ctx context.Context, document map[string]inte
 }
 
 // RetrieveDocument
-func (db *DB) RetrieveDocument(ctx context.Context, id string, options ...Options) (output map[string]interface{}, err error) {
+func (db *DB) RetrieveDocument(ctx context.Context, id string, options ...map[string]interface{}) (output map[string]interface{}, err error) {
 	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name(), id).AddQuery(mergeOptions(options...)).String()
 
 	res, err := db.client.request(http.MethodGet, path, nil, nil)
@@ -114,7 +114,7 @@ func (db *DB) RetrieveDocument(ctx context.Context, id string, options ...Option
 }
 
 // UpdateDocument
-func (db *DB) UpdateDocument(ctx context.Context, id string, document interface{}, options ...Options) (output map[string]interface{}, err error) {
+func (db *DB) UpdateDocument(ctx context.Context, id string, document interface{}, options ...map[string]interface{}) (output map[string]interface{}, err error) {
 	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name(), id).AddQuery(mergeOptions(options...)).String()
 
 	headers := map[string]string{
@@ -146,7 +146,7 @@ func (db *DB) UpdateDocument(ctx context.Context, id string, document interface{
 }
 
 // DeleteDocument
-func (db *DB) DeleteDocument(ctx context.Context, id string, options ...Options) (output map[string]interface{}, err error) {
+func (db *DB) DeleteDocument(ctx context.Context, id string, options ...map[string]interface{}) (output map[string]interface{}, err error) {
 	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name(), id).AddQuery(mergeOptions(options...)).String()
 
 	res, err := db.client.request(http.MethodDelete, path, nil, nil)
@@ -164,7 +164,7 @@ func (db *DB) DeleteDocument(ctx context.Context, id string, options ...Options)
 }
 
 // ListDocuments
-func (db *DB) ListDocuments(ctx context.Context, options ...Options) (output map[string]interface{}, err error) {
+func (db *DB) ListDocuments(ctx context.Context, options ...map[string]interface{}) (output map[string]interface{}, err error) {
 	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name(), "_all_docs").AddQuery(mergeOptions(options...)).String()
 
 	headers := map[string]string{
