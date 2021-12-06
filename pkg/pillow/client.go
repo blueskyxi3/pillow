@@ -4,47 +4,72 @@ import (
 	"context"
 	"crypto/tls"
 	"encoding/json"
+	"errors"
 	"net"
 	"net/http"
 	"net/url"
 	"time"
 
 	"github.com/enenumxela/pillow/pkg/ub"
+	"github.com/imdario/mergo"
 )
 
+// Client
 type Client struct {
 	dsn  string
 	http *http.Client
 }
 
+// ClientOptions
+type ClientOptions struct {
+	Timeout int
+}
+
 // New
-func New(dsn string) (client *Client, err error) {
+func New(dsn string, opts ...*ClientOptions) (*Client, error) {
+	options := &ClientOptions{
+		Timeout: 30,
+	}
+
+	if len(opts) > 0 {
+		if err := mergo.Merge(&options, opts[0], mergo.WithOverride); err != nil {
+			return nil, err
+		}
+	}
+
 	parsedDSN, err := url.Parse(dsn)
 	if err != nil {
-		return
+		return nil, err
 	}
 
-	timeout := 30
-
-	transport := &http.Transport{
-		TLSClientConfig: &tls.Config{
-			InsecureSkipVerify: true,
-		},
-		DialContext: (&net.Dialer{
-			Timeout:   time.Duration(timeout) * time.Second,
-			KeepAlive: time.Second,
-			DualStack: true,
-		}).DialContext,
-	}
-
-	client = &Client{
-		dsn: parsedDSN.String(),
-		http: &http.Client{
-			Transport: transport,
+	HTTPClient := &http.Client{
+		Transport: &http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true,
+			},
+			DialContext: (&net.Dialer{
+				Timeout:   time.Duration(options.Timeout) * time.Second,
+				KeepAlive: time.Second,
+				DualStack: true,
+			}).DialContext,
 		},
 	}
 
-	return
+	res, err := HTTPClient.Get(parsedDSN.String())
+	if err != nil {
+		return nil, err
+	}
+
+	defer res.Body.Close()
+
+	if res.StatusCode != http.StatusOK {
+		return nil, errors.New("Non-OK HTTP status")
+	}
+
+	return &Client{
+		dsn:  parsedDSN.String(),
+		http: HTTPClient,
+	}, nil
 }
 
 // DSN returns the data source name used to connect this client.
