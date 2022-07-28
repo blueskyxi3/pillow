@@ -13,16 +13,16 @@ pillow is a CouchDB client in [Go(Golang)](https://golang.org/).
 Install pillow as you normally would for any Go package:
 
 ```bash
-go get -u github.com/enenumxela/pillow/pkg/pillow
+go get -u github.com/blueskyxi3/pillow/pkg/pillow
 ```
 
 ## Usage
 
-Please consult the the [package documentation](https://godoc.org/github.com/enenumxela/pillow) for all available API methods, and a complete usage documentation.
+Please consult the the [package documentation](https://godoc.org/github.com/blueskyxi3/pillow) for all available API methods, and a complete usage documentation.
 
 ### Example
 
-For additional usage examples, [consult the wiki](https://github.com/enenumxela/pillow/wiki/Usage-Examples).
+For additional usage examples, [consult the wiki](https://github.com/blueskyxi3/pillow/wiki/Usage-Examples).
 
 ```go
 package main
@@ -32,7 +32,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/enenumxela/pillow/pkg/pillow"
+	"github.com/blueskyxi3/pillow/pkg/pillow"
 )
 
 func main() {

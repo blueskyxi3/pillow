@@ -1,4 +1,4 @@
-module github.com/enenumxela/pillow
+module github.com/blueskyxi3/pillow
 
 go 1.17
 

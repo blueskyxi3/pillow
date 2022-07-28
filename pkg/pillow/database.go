@@ -3,10 +3,9 @@ package pillow
 import (
 	"context"
 	"encoding/json"
+	"github.com/blueskyxi3/pillow/pkg/ub"
 	"io/ioutil"
 	"net/http"
-
-	"github.com/enenumxela/pillow/pkg/ub"
 )
 
 type DB struct {
@@ -14,17 +13,14 @@ type DB struct {
 	client *Client
 }
 
-// Name
 func (db *DB) Name() string {
 	return db.name
 }
 
-// Client
 func (db *DB) Client() *Client {
 	return db.client
 }
 
-// Exists
 func (db *DB) Exists(ctx context.Context, options ...map[string]interface{}) (exists bool, err error) {
 	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name()).AddQuery(mergeOptions(options...)).String()
 
@@ -67,7 +63,6 @@ func (db *DB) Create(ctx context.Context, options ...map[string]interface{}) (ou
 	return
 }
 
-// Query
 func (db *DB) Query(ctx context.Context, ddcoc, view string, options ...map[string]interface{}) (output map[string]interface{}, err error) {
 	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.name, "_design", ddcoc, "_view", view).AddQuery(mergeOptions(options...)).String()
 
@@ -89,8 +84,7 @@ func (db *DB) Query(ctx context.Context, ddcoc, view string, options ...map[stri
 	return
 }
 
-// Delete
-// {"ok":true}
+//Delete {"ok":true}
 func (db *DB) Delete(ctx context.Context, options ...map[string]interface{}) (output *DeleteDatabaseResponse, err error) {
 	path := ub.NewURLBuilder(db.client.DSN()).AddPath(db.Name()).AddQuery(mergeOptions(options...)).String()
 

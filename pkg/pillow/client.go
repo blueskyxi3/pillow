@@ -10,22 +10,21 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/enenumxela/pillow/pkg/ub"
+	"github.com/blueskyxi3/pillow/pkg/ub"
 	"github.com/imdario/mergo"
 )
 
-// Client
 type Client struct {
 	dsn  string
 	http *http.Client
 }
 
-// ClientOptions
+// ClientOptions client options
 type ClientOptions struct {
 	Timeout int
 }
 
-// New
+// New create a client
 func New(dsn string, opts ...*ClientOptions) (*Client, error) {
 	options := &ClientOptions{
 		Timeout: 30,
@@ -77,7 +76,7 @@ func (client *Client) DSN() string {
 	return client.dsn
 }
 
-// Ping
+// Ping database check
 func (client *Client) Ping(ctx context.Context) (pong bool, err error) {
 	path := client.DSN()
 
@@ -95,7 +94,7 @@ func (client *Client) Ping(ctx context.Context) (pong bool, err error) {
 	return
 }
 
-// ListDatabases
+// ListDatabases list databases
 func (client *Client) ListDatabases(ctx context.Context, options ...map[string]interface{}) (databases []string, err error) {
 	path := ub.NewURLBuilder(client.DSN()).AddPath("_all_dbs").String()
 
@@ -113,7 +112,6 @@ func (client *Client) ListDatabases(ctx context.Context, options ...map[string]i
 	return
 }
 
-// Database
 func (client *Client) Database(ctx context.Context, name string) (db *DB) {
 	db = &DB{
 		name,
